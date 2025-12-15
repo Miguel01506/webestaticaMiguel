@@ -1,0 +1,81 @@
+/* BODY - fondo con imagen y overlay para legibilidad */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  /* Imagen de fondo + overlay semi-transparente para que el texto se lea bien */
+  background-image: linear-gradient(rgba(39, 16, 87, 0.4), rgba(3, 3, 95, 0.4)), url('https://images.unsplash.com/photo-1477346611705-65d1883cee1e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0dXJhbGV6YSUyMG9zY3VyYXxlbnwwfHwwfHx8MA%3D%3D&fm=jpg&q=60&w=3000');
+  background-size: cover;      /* La imagen cubre toda la pantalla */
+  background-position: center; /* Centrar la imagen */
+  background-repeat: no-repeat;
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CONTENEDOR CENTRAL - glassmorphism */
+.container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.082); /* translúcido */
+  backdrop-filter: blur(7px);           /* efecto vidrio */
+  padding: 40px 60px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* TÍTULO */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* PÁRRAFOS */
+p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* BOTÓN */
+button {
+  background-color: #ffffff;
+  color: #1d1649; /* verde oscuro */
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+button:hover {
+  background-color: #271c5e;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* RESPONSIVE - ajusta texto en pantallas pequeñas */
+@media (max-width: 600px) {
+  .container {
+    padding: 30px 20px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}

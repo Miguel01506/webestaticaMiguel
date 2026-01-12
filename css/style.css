@@ -79,3 +79,32 @@ button:hover {
     font-size: 14px;
   }
 }
+
+/* INPUT TEXT */
+input[type="text"] {
+  width: 100%;                    /* ocupa todo el ancho del contenedor */
+  max-width: 300px;               /* ancho máximo */
+  padding: 12px 15px;             /* espacio interno */
+  border: 1px solid rgba(255, 255, 255, 0.4); /* borde translúcido */
+  border-radius: 10px;            /* esquinas redondeadas */
+  background: rgba(255, 255, 255, 0.1);       /* fondo semi-transparente */
+  color: #fff;                     /* texto blanco */
+  font-size: 16px;
+  outline: none;                  /* quita el borde por defecto al seleccionar */
+  backdrop-filter: blur(5px);     /* efecto vidrio */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Placeholder */
+input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.6); /* placeholder semitransparente */
+}
+
+/* Efecto al hacer focus */
+input[type="text"]:focus {
+  border: 1px solid #ffffff;       /* resalta el borde */
+  background: rgba(255, 255, 255, 0.2); /* fondo más claro */
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  transform: scale(1.02);
+}

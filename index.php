@@ -13,7 +13,7 @@
       <input type="text" name="nombre" placeholder="Escribe tu nombre">
       <button type="submit">Mostrar hora</button>
     </form>
-  </div>
+  
 
   <p>
     <?php
@@ -32,6 +32,7 @@
       }
     ?>
   </p>
+  </div>
 
 </body>
 </html>

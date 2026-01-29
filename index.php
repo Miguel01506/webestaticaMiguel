@@ -28,8 +28,8 @@
 
         try {
             $cadena_conexion = 'mysql:dbname=relojes_mundo;host=127.0.0.1';
-            $usuario = 'miguel';
-            $clave = 'Miguel#28';
+            $usuario = 'root';
+            $clave = '';
 
             $bd = new PDO($cadena_conexion, $usuario, $clave);
 

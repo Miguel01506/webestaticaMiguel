@@ -45,14 +45,17 @@
                 ':lugar' => "%" . $lugar . "%"
             ]);
 
-            foreach($stmt as $fila) {
-              $zona = $fila["zona_horaria"];
-              $fecha = new DateTime("now", new DateTimeZone($zona));
-              $hora = $fecha->format("H:i:s");
+            $fila = $stmt->fetch(PDO::FETCH_ASSOC);
 
-              echo "Bienvenido, la hora actual en " . $fila["nombre"] . ", " . $fila["pais"] . " es: $hora";
+            if ($fila) {
+                $zona_horaria = $fila['zona_horaria'];
+                date_default_timezone_set($zona_horaria);
+                $hora_actual = date('H:i:s');
+
+                echo "La hora actual en " . htmlspecialchars($fila['nombre']) . ", " . htmlspecialchars($fila['pais']) . " es: " . $hora_actual;
+            } else {
+                echo "No se encontró el lugar especificado.";
             }
-              echo "No se encontró ese lugar en la base de datos.";
 
         } catch (PDOException $e) {
           echo "Error de conexión a la base de datos: " . $e->getMessage();

@@ -27,7 +27,7 @@
         }
 
         try {
-            $cadena_conexion = 'mysql:dbname=relojes_mundo;host=127.0.0.1';
+            $cadena_conexion = 'mysql:dbname=relojes_mundo;host=3.95.204.198';
             $usuario = 'miguel';
             $clave = 'Miguel#28';
 

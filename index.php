@@ -8,9 +8,9 @@
 <body>
 
   <div class="container">
-    <h1><strong>Bienvenido  a la página web de Miguel Ángel</strong></h1>
+    <h1><strong>Bienvenido al Reloj Mundial de Miguel</strong></h1>
     <form method="POST">
-      <input type="text" name="nombre" placeholder="Escribe tu nombre">
+      <input type="text" name="lugar" placeholder="Madrid, Tokio, México..." required>
       <button type="submit">Mostrar hora</button>
     </form>
   
@@ -19,15 +19,43 @@
     <?php
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        $nombre = trim($_POST["nombre"] ?? "");
+        $lugar = trim($_POST["lugar"] ?? "");
 
-        if ($nombre === "") {
-          echo "Por favor, ingresa tu nombre.";
-        } else {
-          date_default_timezone_set("Europe/Madrid"); 
-          $hora = date("H:i:s");
+        if ($lugar === "") {
+          echo "Por favor, ingresa un lugar.";
+          exit;
+        }
 
-          echo "Hola $nombre, la hora actual en tu ubicación es: $hora";
+        try {
+            $cadena_conexion = 'mysql:dbname=reloj_mundial;host=127.0.0.1';
+            $usuario = 'root';
+            $clave = '';
+
+            $bd = new PDO($cadena_conexion, $usuario, $clave);
+
+            $sql = "
+                SELECT nombre, pais, zona_horaria
+                FROM lugares
+                WHERE nombre LIKE :lugar OR pais LIKE :lugar
+                LIMIT 1
+            ";
+
+            $stmt = $bd->prepare($sql);
+            $stmt->execute([
+                ':lugar' => "%" . $lugar . "%"
+            ]);
+
+            foreach($stmt as $fila) {
+              $zona = $fila["zona_horaria"];
+              $fecha = new DateTime("now", new DateTimeZone($zona));
+              $hora = $fecha->format("H:i:s");
+
+              echo "Bienvenido, la hora actual en " . $fila["nombre"] . ", " . $fila["pais"] . " es: $hora";
+            }
+              echo "No se encontró ese lugar en la base de datos.";
+
+        } catch (PDOException $e) {
+          echo "Error de conexión a la base de datos: " . $e->getMessage();
         }
       }
     ?>

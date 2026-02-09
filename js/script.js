@@ -4,15 +4,27 @@ window.onload = function() {
   let nombre = document.getElementById("nombre");
 
   boton.onclick = function() {
-    const ahora = new Date();
-    const hora = ahora.toLocaleTimeString();
-
     if (nombre.value.trim() === "") {
       mensaje.textContent = "Por favor, ingresa tu nombre.";
       return;
     }
-    
-    mensaje.textContent = "Hola " + nombre.value + ", la hora actual en tu ubicación es: " + hora;
-    nombre.value = "";
+
+    const nombreUsuario = nombre.value;
+    const url = `http://localhost:8080/api/saludos?nombre=${encodeURIComponent(nombreUsuario)}`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        if (data.estado === "success") {
+          mensaje.textContent = data.mensaje;
+        } else {
+          mensaje.textContent = "Error: No se pudo obtener el saludo.";
+        }
+        nombre.value = "";
+      })
+      .catch(error => {
+        console.error("Error en la solicitud:", error);
+        mensaje.textContent = "Error al conectar con el servidor.";
+      });
   }
 }
